@@ -56,7 +56,7 @@ moduleForComponent('polling-test', 'PollingMixin', {
   }
 });
 
-test('it properly stops polling hook without any models', function() {
+test('it properly stops polling hook without any models', function(assert) {
   var component, expected;
   component = this.subject({
     pollModels: null
@@ -77,7 +77,7 @@ test('it properly stops polling hook without any models', function() {
   return deepEqual(pollingChangesHistory, expected);
 });
 
-test('it works even if one of the model is null', function() {
+test('it works even if one of the model is null', function(assert) {
   var component, expected;
   component = this.subject({
     model1: {
@@ -110,7 +110,7 @@ test('it works even if one of the model is null', function() {
   return deepEqual(pollingChangesHistory, expected);
 });
 
-test('it polls for both models if they are present', function() {
+test('it polls for both models if they are present', function(assert) {
   var component, expected;
   component = this.subject({
     model1: {
@@ -156,7 +156,7 @@ test('it polls for both models if they are present', function() {
   return deepEqual(pollingChangesHistory, expected);
 });
 
-test('it detects model changes', function() {
+test('it detects model changes', function(assert) {
   var component, expected;
   component = this.subject({
     model1: {

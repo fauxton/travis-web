@@ -5,9 +5,9 @@ var server = null;
 
 moduleForComponent('travis-status', 'TravisStatusComponent', {});
 
-test('adds incident class to .status-circle', function() {
+test('adds incident class to .status-circle', function(assert) {
   var component;
-  expect(3);
+  assert.expect(3);
   component = this.subject();
   component.getStatus = function() {
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -18,8 +18,8 @@ test('adds incident class to .status-circle', function() {
       });
     });
   };
-  ok(!component.get('status'), 'status is initially not set');
+  assert.ok(!component.get('status'), 'status is initially not set');
   this.append();
-  equal(component.get('status'), 'major', 'status is updated from the API');
+  assert.equal(component.get('status'), 'major', 'status is updated from the API');
   return ok(component.$('.status-circle').hasClass('major'), 'status class is set on .status-circle');
 });

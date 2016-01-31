@@ -8,6 +8,6 @@ test('it renders', function(assert) {
     center: true
   });
   this.append();
-  ok(component.$('span').hasClass('loading-indicator'), 'component has loading indicator class');
+  assert.ok(component.$('span').hasClass('loading-indicator'), 'component has loading indicator class');
   return ok(component.$().hasClass('loading-container'), 'indicator gets parent class if centered flag is given');
 });

@@ -4,7 +4,7 @@ moduleForComponent('owner-repo-tile', 'OwnerRepoTileComponent', {
   needs: ['helper:format-time', 'helper:format-duration', 'helper:format-sha', 'component:status-icon', 'component:request-icon']
 });
 
-test('it renders', function() {
+test('it renders', function(assert) {
   var attributes, component;
   attributes = {
     slug: "travis-ci/travis-chat",
@@ -31,8 +31,8 @@ test('it renders', function() {
     repo: attributes
   });
   this.append();
-  ok(component.$().hasClass('passed'), 'component should have state class (passed)');
-  equal(component.$('.row-item:nth-of-type(1)').text().trim(), 'travis-chat', 'should display correct repo name');
-  equal(component.$('.row-item:nth-of-type(3)').text().trim(), 'master', 'should display branch name');
+  assert.ok(component.$().hasClass('passed'), 'component should have state class (passed)');
+  assert.equal(component.$('.row-item:nth-of-type(1)').text().trim(), 'travis-chat', 'should display correct repo name');
+  assert.equal(component.$('.row-item:nth-of-type(3)').text().trim(), 'master', 'should display branch name');
   return equal(component.$('.row-item:nth-of-type(4)').text().trim(), '16fff34', 'should display correct commit sha');
 });

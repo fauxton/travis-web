@@ -5,7 +5,7 @@ moduleForComponent('repo-actions', 'RepoActionsComponent', {
   needs: ['component:build-repo-actions', 'component:job-repo-actions']
 });
 
-test('it displays code climate if the repo language is ruby', function() {
+test('it displays code climate if the repo language is ruby', function(assert) {
   var component, repo;
   repo = Ember.Object.create({
     githubLanguage: 'Ruby'
@@ -14,11 +14,11 @@ test('it displays code climate if the repo language is ruby', function() {
     repo: repo
   });
   this.append();
-  ok(component.get('displayCodeClimate'), 'component should try to display code climate');
+  assert.ok(component.get('displayCodeClimate'), 'component should try to display code climate');
   return ok(component.$('a[name=code-climate]').length, 'component should render a code climate button');
 });
 
-test('it doesn\'t display code climate for other languages', function() {
+test('it doesn\'t display code climate for other languages', function(assert) {
   var component, repo;
   repo = Ember.Object.create({
     githubLanguage: 'Go'
@@ -27,6 +27,6 @@ test('it doesn\'t display code climate for other languages', function() {
     repo: repo
   });
   this.append();
-  ok(!component.get('displayCodeClimate'), 'component should not try to display code climate');
+  assert.ok(!component.get('displayCodeClimate'), 'component should not try to display code climate');
   return ok(!component.$('a[name=code-climate]').length, 'component should not render a code climate button');
 });

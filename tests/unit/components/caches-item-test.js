@@ -4,7 +4,7 @@ moduleForComponent('caches-item', 'CachesItemComponent', {
   needs: ['helper:format-time', 'helper:travis-mb', 'component:request-icon']
 });
 
-test('it renders', function() {
+test('it renders', function(assert) {
   var attributes, component;
   attributes = {
     repository_id: 10,
@@ -17,7 +17,7 @@ test('it renders', function() {
     cache: attributes
   });
   this.append();
-  ok(component.$().hasClass('push'), 'component should have a type class (push)');
-  equal(component.$('.row-item:first-child .label-align').text().trim(), 'master', 'branch name should be displayed');
+  assert.ok(component.$().hasClass('push'), 'component should have a type class (push)');
+  assert.equal(component.$('.row-item:first-child .label-align').text().trim(), 'master', 'branch name should be displayed');
   return equal(component.$('.row-item:nth-child(3) .label-align').text().trim(), '1.00MB', 'size should be displayed');
 });

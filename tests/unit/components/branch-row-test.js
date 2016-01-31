@@ -4,7 +4,7 @@ moduleForComponent('branch-row', 'BranchRowComponent', {
   needs: ['helper:format-time', 'helper:format-duration', 'helper:pretty-date', 'helper:format-sha', 'component:build-tile', 'component:status-icon', 'component:request-icon', 'component:loading-indicator']
 });
 
-test('it renders', function() {
+test('it renders', function(assert) {
   var attributes, component;
   attributes = {
     name: "master",
@@ -46,9 +46,9 @@ test('it renders', function() {
     build: attributes
   });
   this.append();
-  ok(component.$().hasClass('passed'), 'component should have state class (passed)');
-  equal(component.$('.row-name .label-align').text().trim(), 'master', 'should display correct branch name');
-  equal(component.$('.row-request .label-align').text().trim(), '#1 passed', 'should display build number and state');
-  equal(component.$('.row-commiter .label-align').text().trim(), 'Dan Buch', 'should display correct commiter name');
+  assert.ok(component.$().hasClass('passed'), 'component should have state class (passed)');
+  assert.equal(component.$('.row-name .label-align').text().trim(), 'master', 'should display correct branch name');
+  assert.equal(component.$('.row-request .label-align').text().trim(), '#1 passed', 'should display build number and state');
+  assert.equal(component.$('.row-commiter .label-align').text().trim(), 'Dan Buch', 'should display correct commiter name');
   return equal(component.$('.row-commit .label-align').text().trim(), 'a82f6ba', 'should display correct commit sha');
 });

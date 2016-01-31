@@ -1,3 +1,4 @@
+import {module, test} from 'qunit';
 import Ember from 'ember';
 import Polling from 'travis/services/polling';
 import config from 'travis/config/environment';
@@ -5,10 +6,10 @@ import config from 'travis/config/environment';
 var service;
 
 module('PollingService', {
-  setup() {
+  beforeEach() {
     return config.ajaxPolling = true;
   },
-  teardown() {
+  afterEach() {
     config.ajaxPolling = false;
     if (!service.get('isDestroyed')) {
       return Ember.run(function() {
@@ -18,22 +19,22 @@ module('PollingService', {
   }
 });
 
-test('polls for each of the models', function() {
+test('polls for each of the models', function(assert) {
   var history, model1, model2;
-  expect(3);
+  assert.expect(3);
   history = [];
   service = Polling.create({
     pollingInterval: 20
   });
   model1 = {
     reload: function() {
-      ok(true);
+      assert.ok(true);
       return history.push('model1');
     }
   };
   model2 = {
     reload: function() {
-      ok(true);
+      assert.ok(true);
       return history.push('model2');
     }
   };
@@ -42,16 +43,16 @@ test('polls for each of the models', function() {
   stop();
   return setTimeout(function() {
     start();
-    deepEqual(history, ['model1', 'model2']);
+    assert.deepEqual(history, ['model1', 'model2']);
     return Ember.run(function() {
       return service.destroy();
     });
   }, 30);
 });
 
-test('it will stop running any reloads after it is destroyed', function() {
+test('it will stop running any reloads after it is destroyed', function(assert) {
   var model;
-  expect(1);
+  assert.expect(1);
   service = Polling.create({
     pollingInterval: 20
   });
@@ -72,22 +73,22 @@ test('it will stop running any reloads after it is destroyed', function() {
   }, 50);
 });
 
-test('it stops reloading models after they were removed from polling', function() {
+test('it stops reloading models after they were removed from polling', function(assert) {
   var history, model1, model2;
-  expect(4);
+  assert.expect(4);
   history = [];
   service = Polling.create({
     pollingInterval: 30
   });
   model1 = {
     reload: function() {
-      ok(true);
+      assert.ok(true);
       return history.push('model1');
     }
   };
   model2 = {
     reload: function() {
-      ok(true);
+      assert.ok(true);
       return history.push('model2');
     }
   };
@@ -106,9 +107,9 @@ test('it stops reloading models after they were removed from polling', function(
   }, 40);
 });
 
-test('it runs a hook on each interval', function() {
+test('it runs a hook on each interval', function(assert) {
   var history, source;
-  expect(1);
+  assert.expect(1);
   history = [];
   service = Polling.create({
     pollingInterval: 20
@@ -131,9 +132,9 @@ test('it runs a hook on each interval', function() {
   }, 30);
 });
 
-test('it will not run pollHook if the source is destroyed', function() {
+test('it will not run pollHook if the source is destroyed', function(assert) {
   var history, source;
-  expect(1);
+  assert.expect(1);
   history = [];
   service = Polling.create({
     pollingInterval: 20
